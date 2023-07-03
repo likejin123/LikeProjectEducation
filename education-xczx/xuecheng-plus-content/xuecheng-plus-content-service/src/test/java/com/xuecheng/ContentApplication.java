@@ -1,0 +1,20 @@
+package com.xuecheng;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @Author 李柯锦
+ * @Date 2023/7/2 15:20
+ * @Description 内容管理服务启动类
+ */
+
+@MapperScan("com.xuecheng.content.mapper")
+@SpringBootApplication
+public class ContentApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ContentApplication.class);
+    }
+}
