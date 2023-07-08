@@ -4,7 +4,7 @@ import { getToken } from '@/utils/cookies'
 
 const service = axios.create({
   baseURL: '/api',
-  timeout: 5000 * 5
+  timeout: 600000
 })
 service.defaults.headers.post['Content-Type'] = 'application/json'
 
@@ -64,7 +64,7 @@ service.interceptors.response.use(
     Message({
       message: error.response.data.errMessage || error.message,
       type: 'error',
-      duration: 5 * 1000
+      duration: 5 * 10000
     })
     if(error.response.status=="401" && error.response.data.errMessage=='没有认证'){
       window.location='http://www.51xuecheng.cn/sign.html'
