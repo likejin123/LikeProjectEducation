@@ -8,6 +8,7 @@ import com.xuecheng.base.exception.XueChengPlusException;
 import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
 import com.xuecheng.base.model.RestResponse;
+import com.xuecheng.base.utils.StringUtil;
 import com.xuecheng.media.mapper.MediaFilesMapper;
 import com.xuecheng.media.mapper.MediaProcessMapper;
 import com.xuecheng.media.model.dto.QueryMediaParamsDto;
@@ -91,16 +92,17 @@ public class MediaFileServiceImpl implements MediaFileService {
 
 
 
- /*
+    /*
   * @Description 上传图片接口（保存MinIO 保存数据库）
   * @param companyId
  * @param uploadFileParamsDto
  * @param localFilePath 本地存储的文件绝对路径
+ * @param objectName 存储html的路径（供远程调用，让html放到course目录下，而不是放到年月日）
   * @return UploadFileResultDto
   **/
  @Transactional
  @Override
- public UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, String localFilePath) {
+ public UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, String localFilePath, String objectName) {
 
   //上传文件到minio
 
@@ -117,7 +119,10 @@ public class MediaFileServiceImpl implements MediaFileService {
   //文件的md5值（文件名字）
   String fileMd5 = getFileMd5(new File(localFilePath));
 
-  String objectName = defaultFolderPath + fileMd5 + extention;
+  if(StringUtil.isEmpty(objectName)){
+      objectName = defaultFolderPath + fileMd5 + extention;
+  }
+
   //以年月日生成
   boolean result = addMediaFilesToMinIO(localFilePath,mimeType,bucket_Files,objectName);
   if(!result){

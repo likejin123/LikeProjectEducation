@@ -1,0 +1,38 @@
+#微服务配置
+spring:
+  application:
+    name: orders-api
+  cloud:
+    nacos:
+      server-addr: 192.168.101.65:8848
+      discovery:
+        namespace: dev402
+        group: xuecheng-plus-project
+      config:
+        namespace: dev402
+        group: xuecheng-plus-project
+        file-extension: yaml
+        refresh-enabled: true
+        extension-configs:
+          - data-id: orders-service-${spring.profiles.active}.yaml
+            group: xuecheng-plus-project
+            refresh: true
+        shared-configs:
+          - data-id: swagger-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+          - data-id: logging-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+          - data-id: rabbitmq-${spring.profiles.active}.yaml
+            group: xuecheng-plus-common
+            refresh: true
+  profiles:
+    active: dev
+pay:
+  qrcodeurl: http://192.168.101.1:63030/orders/requestpay?payNo=%s
+  alipay:
+    APP_ID: 2021000122627231
+    APP_PRIVATE_KEY: MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCsL6378mIfHKVeDkDCrPVg59HXQLlk1W1rVNlVE07dydAOHYCGN03lsSTGseduF1LkBZd5r45H/O1gOpaEGsOteKH9/79z1qhZPIM6Z19yNzLYrhJFF4DIVvOBvZCdc3efl+C2K1eNZwHSub3wqWgZwe/vUU4COx8TUBTkXudbkbWxrOOmr9eXbZ3VAv41p+eHpwbpxiSjGhEBl79Ey5AgJeoaYdyFvP9Zz3bcBFMmp7VPZ2TjG10EGTu9hh0vNjXDXdKAb60rkpOB/EdmEC+sZYqaL8lRylPHxn5mSqwBajf5ogMajpWDMzMjukJuy7tZmAjZSQt+NF4+x0AKCvEFAgMBAAECggEBAJ7x0Ih/oaYYmmpte8h5QnW26RTrsXfsMHpgs9J95VKE5iLxht/ek3DRiiJEvV759tF4e/CfZxb62uD2lFTUJAexENBYUhILeBIP8w9pt0jGvZAZd9IBtSa6ZURBigpeOXHAEHX5InPsP1mXjkdnCiqkxOjEw975VmFMjkyVcroqCbZWMEtG0c7uexQFRF4zrNr1xxWvX4l6hyhPkpaAnxhZXu7KxbgOZx9+m/v3k6AHimva2wSLoZPiOSRzDOR9sOGFNOKHZ/LfebBCGkuC0M03qlqEq7JGJUN9OBAJIyUcy+3cHcQl59duM/sVpXga6Z7ZIr6eDw3VKKwrjibATmECgYEA9uswWIzPWsc75OIMdan7TmxXFMTqHAMnSdIv7NstopSHrr8/C5E5bAwD/YrsGNgof9XL2Hq1QrypAjXXxKWm3pUl/HSo1TDdJkriKXJyXIBm3egQzExnqXmnzdQOO+7MIRS83/G8OuJu/wOJHTa0roJMLK9tNRr5oq6SBWQdsj0CgYEAsoTc79dWqMW3LMMTnIRPnuwnCeX3oZ+qIIPnURGXCDaQnQM0TJHdtUJAihwPyZP834zoJlKYRawN6ENi3XZ3+NThQFdPUMHEK+JsjyhMtS6opLj/UFZop6qKYLT2z14dMKYw2MQ802JYfp0YCXCJxTjQnsSfVuXiRMSOZ5/rjmkCgYEAzIGu4Sh+9Sjeqouu1iWbRzDkTwdo/xp9h97WYs6F1Yo/drRfey0k6iBpja1qLomZwYdJ9lprloK7WGFP/EdXFjNh6t6Ulz6JbBXJi5qGraaLjG+QuiTuFqf0G73urCT0XNHYPYLx67NvSzeacN/GdmLkxH3nbXySFfOQbXamQeECgYBx7RiSd3p2erdLebMqT8YARfUj+/7sxlhsJ8GXmwIn26quiTz3IJ+87WsCuKXanvbiM6pzyoIi9Iprj5Wof9JQmoql5RJZF096MiXVtoI9nmlBtk45lutzFQL6dIKOFCHMykKiE5o9zKVtKBQO8iL6GigJKrIFYu/jswyuVQCfAQKBgQDW8xcd00lRMvpANvPg/viw/s3dh2QO5x1SGLFqcpn5ukFt0HHr78NssTJ15v1W6G/uXt1WH6qxWWbUkeHqn/YbqAu38FfGcqJ0IdxGpygZWcPT+CYe0irISq06EHRQ1EVLWbqfXqH7B1p6PiTRPRgdOITBxn54nLGCryHZ6sVqRQ==
+    ALIPAY_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsvHBfpUS46t302LDbxWM+beQI1ZN++pFeJiaqbXt+N3CHJ3X2T2mqXgi2O5YNHfOUzDdR87eqFvcwA11rZ5clhjcqMQtyzvNsNA+3WH7ez/IfqNu8wvtq4ZqnCPoT4ocYkAH2IIaYImT7Kdb1uHfrm4vUgK9WdpuxLQwoCMA5clJg/tKRjGBMzHJI/ppvpyJFkkmW5cb17Ym/o4v0KwqAspzHNhzTHsLR4XvEdRpN6Gnd8sW+oWZe9O4oZtt/IxljHfKpFXucxBIOiz/9Ngv9SpZLLbugpYn24k42WGLO+utHM5+FRxUI44zfa4FkoO00U8ii9jinK7zSBfvVZ34TwIDAQAB
+

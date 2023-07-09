@@ -3,6 +3,7 @@ package com.xuecheng;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @Author 李柯锦
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Description 内容管理服务启动类
  */
 
+@EnableFeignClients(basePackages={"com.xuecheng.content.feignclient"})
 @MapperScan("com.xuecheng.content.mapper")
 @SpringBootApplication
 public class ContentApplication {

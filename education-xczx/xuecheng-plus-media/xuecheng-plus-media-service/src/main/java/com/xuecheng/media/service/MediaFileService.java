@@ -39,12 +39,13 @@ public interface MediaFileService {
   * @param companyId 机构ID
   * @param uploadFileParamsDto 文件信息
   * @param localFilePath 文件本地路径
+  * @param objectNmae 供远程调用 静态页面的生成（传入objectName，按照objectname存储）
   * @return UploadFileResultDto 返回结果
   **/
  //本地文件的路径
  //文件相关信息
  //机构ID
- public UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, String localFilePath);
+ public UploadFileResultDto uploadFile(Long companyId, UploadFileParamsDto uploadFileParamsDto, String localFilePath,String objectName);
 
 
 
